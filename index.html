@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@100&display=swap');
+       
+        :root{
+            --main-color:#e6f6fc;
+        }
+        *{
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all .2s linear;
+        }
+        .umbrella_container{
+            background-color: var(--main-color);
+             min-height: 100vh;
+             /* border:1px solid red; */
+             display:flex;
+             justify-content: center;
+             align-items: center;
+        }
+        .umbrella_container>div{
+            width:50%;
+            
+        }
+       .umbrella_logo_container >img{
+          width:60%;
+       }
+       .umbrella_logo_container{
+           display:flex;
+           align-items: center;
+           justify-content: center;
+           position: relative;
+       }
+       .custom_umbrella_container{
+        /* border: 1px solid red; */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height:40vh;
+       }
+       .theme_buttons_container{
+           width:40%;
+           display:flex;
+           justify-content:space-between
+       }
+       .theme_buttons{
+           border-radius: 50%;
+           cursor: pointer;
+           width:25px;
+           height:25px;
+
+       }
+       .upload_container{
+           height:120px;
+           display: flex;
+           flex-direction: column;
+           justify-content: space-between;
+           position: relative;
+          
+       }
+       #upload_icon{
+           width:20px;
+           position:absolute;
+           top:85px;
+           left:10px;
+           color: white;
+       }
+       .upload_container>button{
+          height:50px;
+          width:60%;
+          background-color: #28b0e4;
+          border: none;
+          color: white;
+          font-size: large;
+          text-transform: uppercase;
+          font-weight: bold;
+       }
+       .custom_umbrella_container >p{
+           font-family: "ui-sans-serif";
+           font-weight:500;
+           font-size: 3rem;
+           line-height: 24px;
+
+       }
+       #custom{
+        font-family: "ui-sans-serif";
+        font-weight: 400;
+        line-height: 24px;
+        font-size: 1.2rem;
+        width:30%;
+       }
+       #upload_para{
+           font-weight:200;
+       }
+       #file_para{
+           font-size: 0.8rem;
+       }
+       #real_file{
+           position: absolute;
+           top:85px;
+       }
+       #logo_name{
+           position: absolute;
+           bottom:50px;
+       }
+       .rotate{
+           animation:rotate 2s linear infinite;
+       }
+
+       @keyframes rotate{
+           100%{
+               transform:rotate(360deg)
+           }
+       }
+    </style>
+</head>
+<body>
+    <div class="umbrella_container">
+        <div class="umbrella_logo_container">
+            <p id="logo_name"></p>
+            <img src="/Blue umbrella.png" alt="blue_umbrella" id="umbrella_pic" >
+        </div>
+        <div class="custom_umbrella_container">
+            <p>Custom Umbrella</p>
+            <div class="theme_buttons_container">
+                <span id="black" class="theme_buttons" style="background-color: black;" onClick="changeUmbrella(id)"></span>
+                <span id="grey" class="theme_buttons" style="background-color:grey ;" onClick="changeUmbrella(id)"></span>
+                <span id="purple" class="theme_buttons" style="background-color:#003057 ;" onClick="changeUmbrella(id)"></span>
+                <span id="pink"class="theme_buttons" style="background-color:#d0016f ;" onClick="changeUmbrella(id)"></span>
+                <span id="blue" class="theme_buttons" style="background-color:#28b0e4" onClick="changeUmbrella(id)"></span>
+                <span id="yellow" class="theme_buttons" style="background-color:yellow ;" onClick="changeUmbrella(id)"></span>
+                <span id="orange" class="theme_buttons" style="background-color:orange ;" onClick="changeUmbrella(id)"></span>
+                <span id="red" class="theme_buttons" style="background-color:red ;" onClick="changeUmbrella(id)"></span>
+            </div>
+            <div class="upload_container">
+                <p id="custom">Customize your umbrella</p>
+                <p id="upload_para">Upload a logo for an instant preview</p>
+                <p id="file_para">.png and .jpg files only.Max file is 5mb</p>
+               <input type="file" id="real_file"  hidden>
+               <img src="/upload_icon.svg" alt="upload_icon" id="upload_icon">
+                <button>Upload Logo</button>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
+<script>
+    let loader_icon="/loader_icon.png"
+    let blue_umbrella="/Blue umbrella.png"
+    let yellow_umbrella="/Yello umbrella.png"
+    let Pink_umbrella="/Pink umbrella.png"
+    let real_file_button=document.getElementById("real_file");
+    let custom_button=document.getElementById("upload_icon");
+    let file_name=document.querySelector("button")
+    let umbrella_pic=document.getElementById("umbrella_pic")
+    let logo_name=document.getElementById("logo_name");
+    let upload_button=document.querySelector("button")
+
+    
+    function changeUmbrella(id){
+        console.log(id);
+     let image=document.getElementById("umbrella_pic");
+     if(id==="blue"){
+        upload_button.style.backgroundColor="#28b0e4"
+         image.src=blue_umbrella
+         
+     }else if(id==="yellow"){
+        upload_button.style.backgroundColor="yellow"
+         image.src=yellow_umbrella
+     }else if(id==="pink"){
+        upload_button.style.backgroundColor="#d0016f"
+         image.src=Pink_umbrella
+     }else if(id==="black"){
+        upload_button.style.backgroundColor=id
+     }else if(id==="grey"){
+        upload_button.style.backgroundColor=id
+     }else if(id==="orange"){
+        upload_button.style.backgroundColor=id
+     }else if(id==="purple"){
+        upload_button.style.backgroundColor=id
+     }else if(id==="red"){
+        upload_button.style.backgroundColor=id
+     }
+        
+    }
+
+  custom_button.addEventListener("click",()=>{
+      real_file_button.click();
+  })
+
+  real_file_button.addEventListener("change",()=>{
+       if(real_file_button.value){
+           custom_button.src=loader_icon;
+           custom_button.setAttribute("class","rotate")
+           file_name.innerText=real_file_button.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
+           logo_name.innerText=real_file_button.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
+       }else{
+           file_name.innerText="Upload logo"
+       }
+  })
+
+</script>
