@@ -108,6 +108,9 @@
            position: absolute;
            top:85px;
        }
+       #umbrella_loader{
+          width:15%;
+       }
        #logo_name{
            position: absolute;
            bottom:50px;
@@ -128,6 +131,8 @@
         <div class="umbrella_logo_container">
             <p id="logo_name"></p>
             <img src="/Blue umbrella.png" alt="blue_umbrella" id="umbrella_pic" >
+
+            <img src="/loader_icon .png" alt="loader_icon" id="umbrella_loader" style="display: none;" >
         </div>
         <div class="custom_umbrella_container">
             <p>Custom Umbrella</p>
@@ -147,7 +152,7 @@
                 <p id="file_para">.png and .jpg files only.Max file is 5mb</p>
                <input type="file" id="real_file"  hidden>
                <img src="/upload_icon.svg" alt="upload_icon" id="upload_icon">
-                <button>Upload Logo</button>
+                <button id="btn">Upload Logo</button>
             </div>
         </div>
 
@@ -156,7 +161,7 @@
 </body>
 </html>
 <script>
-    let loader_icon="/loader_icon.png"
+    let loader_icon="/loader_icon .png"
     let blue_umbrella="/Blue umbrella.png"
     let yellow_umbrella="/Yello umbrella.png"
     let Pink_umbrella="/Pink umbrella.png"
@@ -165,7 +170,9 @@
     let file_name=document.querySelector("button")
     let umbrella_pic=document.getElementById("umbrella_pic")
     let logo_name=document.getElementById("logo_name");
-    let upload_button=document.querySelector("button")
+    let upload_button=document.querySelector("#btn")
+    let umbrella_loader=document.getElementById("umbrella_loader")
+
 
     
     function changeUmbrella(id){
@@ -201,10 +208,20 @@
 
   real_file_button.addEventListener("change",()=>{
        if(real_file_button.value){
+           umbrella_loader.style.display="block";
            custom_button.src=loader_icon;
            custom_button.setAttribute("class","rotate")
-           file_name.innerText=real_file_button.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
-           logo_name.innerText=real_file_button.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
+           file_name.innerText=real_file_button.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+           umbrella_pic.style.display="none"
+           umbrella_loader.setAttribute("class","rotate");
+           setTimeout(()=>{
+               umbrella_loader.classList.remove("rotate");
+               umbrella_loader.style.display="none"
+               umbrella_pic.style.display="block";
+               logo_name.innerText=real_file_button.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
+           },1000)
+            
+        
        }else{
            file_name.innerText="Upload logo"
        }
